@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoPulse | Smart Carbon Footprint Tracker for Professionals</title>
+  <meta name="description" content="Track, understand, and reduce your carbon footprint with personalized daily goals, urban commuter calculators, and AI insights.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo" id="main-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        </svg>
+        <span>EcoPulse</span>
+      </a>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main>
+    <!-- Left Column: Dashboard Stats, Interactive Calculator -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      
+      <!-- Top Metrics Dashboard -->
+      <section class="dashboard-grid">
+        <div class="card stat-card" id="card-footprint">
+          <span class="stat-label">Your Annual Footprint</span>
+          <span class="stat-val" id="metric-footprint">4.2</span>
+          <span class="stat-label" style="text-transform: none; font-size: 0.75rem;">Metric Tons CO₂e</span>
+          <span class="stat-trend trend-down" id="metric-trend">
+            <span style="font-weight: 700;">↓ 12%</span> vs regional professional avg
+          </span>
+        </div>
+        
+        <div class="card stat-card" id="card-reductions">
+          <span class="stat-label">Today's Reductions</span>
+          <span class="stat-val" id="metric-reductions">0</span>
+          <span class="stat-label" style="text-transform: none; font-size: 0.75rem;">Grams of CO₂e saved</span>
+          <span class="stat-trend trend-down" style="color: var(--accent-teal);">
+            Daily habits logged
+          </span>
+        </div>
+
+        <div class="card stat-card" id="card-streak">
+          <span class="stat-label">Consistency Streak</span>
+          <span class="stat-val" id="metric-streak">0</span>
+          <span class="stat-label" style="text-transform: none; font-size: 0.75rem;">Consecutive active days</span>
+          <span class="stat-trend" style="color: var(--accent-orange);" id="streak-level">
+            Start logging to begin!
+          </span>
+        </div>
+      </section>
+
+      <!-- Charts & Visuals Card -->
+      <section class="card" id="card-analytics">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Footprint Breakdown</h2>
+        <div class="chart-wrapper">
+          <svg id="pie-chart" width="240" height="240" viewBox="0 0 32 32" style="transform: rotate(-90deg); border-radius: 50%;">
+            <!-- Dynamic SVG pie sectors will be generated here -->
+          </svg>
+          <div id="chart-legend" style="margin-left: 2rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Dynamic legends will be written here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Carbon Calculator -->
+      <section class="card" id="card-calculator">
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Commuter & Lifestyle Calculator</h2>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem;">Configure your routine below to calculate your estimated baseline emissions.</p>
+        
+        <div class="calculator-section">
+          <!-- Transit Segment -->
+          <div class="calculator-group">
+            <h3 class="group-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+              </svg>
+              Daily Commute
+            </h3>
+            <div class="inputs-grid">
+              <div class="input-field">
+                <label for="commute-mode">Primary Commute Mode</label>
+                <select id="commute-mode">
+                  <option value="electric-car">Electric Vehicle (EV)</option>
+                  <option value="gas-car" selected>Petrol/Diesel Car</option>
+                  <option value="public-transit">Metro / Train / Public Bus</option>
+                  <option value="active-commute">Walking / Cycling / E-Scooter</option>
+                  <option value="none">No Commute (Remote Work)</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label for="commute-distance">Daily Round-Trip Distance (km)</label>
+                <input type="number" id="commute-distance" value="25" min="0">
+              </div>
+            </div>
+          </div>
+
+          <!-- Work setup Segment -->
+          <div class="calculator-group">
+            <h3 class="group-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+              Work Environment
+            </h3>
+            <div class="inputs-grid">
+              <div class="input-field">
+                <label for="wfh-days">Remote Work (WFH) Days / Week</label>
+                <select id="wfh-days">
+                  <option value="0">0 Days (Full Office)</option>
+                  <option value="1">1 Day</option>
+                  <option value="2" selected>2 Days</option>
+                  <option value="3">3 Days</option>
+                  <option value="4">4 Days</option>
+                  <option value="5">5 Days (Full WFH)</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label for="device-count">Active Devices (Monitors, Laptops, Servers)</label>
+                <input type="number" id="device-count" value="3" min="1" max="10">
+              </div>
+            </div>
+          </div>
+
+          <!-- Food & Deliveries -->
+          <div class="calculator-group">
+            <h3 class="group-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              Food & Diet Pattern
+            </h3>
+            <div class="inputs-grid">
+              <div class="input-field">
+                <label for="diet-type">Primary Diet Type</label>
+                <select id="diet-type">
+                  <option value="meat-heavy">Meat Heavy (Daily Beef/Pork)</option>
+                  <option value="balanced" selected>Balanced (Mixed Poultry, Fish, Veg)</option>
+                  <option value="vegetarian">Vegetarian (No Meat)</option>
+                  <option value="vegan">Vegan (Strict Plant-Based)</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label for="delivery-meals">Delivery Meal Orders / Week</label>
+                <input type="number" id="delivery-meals" value="4" min="0">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column: Habits, AI Recommendations, Achievements -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      
+      <!-- Smart Assistant Panel -->
+      <section class="card" id="card-assistant">
+        <div class="assistant-panel">
+          <div class="assistant-header">
+            <div class="assistant-avatar">🤖</div>
+            <div>
+              <h2 style="font-size: 1.125rem; font-weight: 700;">EcoPulse Assistant</h2>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Real-time personalized coaching</p>
+            </div>
+          </div>
+          
+          <div class="assistant-speech" id="assistant-speech-bubble">
+            Checking your current commuter settings... Update the calculator to receive customized recommendations!
+          </div>
+
+          <div class="insight-card" id="assistant-primary-insight">
+            <span class="insight-title">Key Carbon Hotspot</span>
+            <p class="insight-text" id="assistant-hotspot-text">Loading insights...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Daily Habit Tracker Checklist -->
+      <section class="card" id="card-habits">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Daily Actions</h2>
+        <p style="color: var(--text-muted); font-size: 0.8125rem; margin-bottom: 1.5rem;">Tick today's positive changes to instantly log your offset reductions.</p>
+        
+        <div class="habit-list" id="habits-container">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </section>
+
+      <!-- Gamified Badges / Achievements -->
+      <section class="card" id="card-achievements">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Achievements</h2>
+        <p style="color: var(--text-muted); font-size: 0.8125rem; margin-bottom: 1rem;">Unlock badges as you implement habits and lower your score.</p>
+        
+        <div class="badges-grid" id="badges-container">
+          <div class="badge-item" id="badge-first-step">
+            <div class="badge-icon">🌱</div>
+            <span class="badge-name">First Step</span>
+          </div>
+          <div class="badge-item" id="badge-transit-hero">
+            <div class="badge-icon">🚇</div>
+            <span class="badge-name">Transit Hero</span>
+          </div>
+          <div class="badge-item" id="badge-green-eater">
+            <div class="badge-icon">🥗</div>
+            <span class="badge-name">Green Eater</span>
+          </div>
+          <div class="badge-item" id="badge-carbon-cutter">
+            <div class="badge-icon">✂️</div>
+            <span class="badge-name">Carbon Cutter</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 EcoPulse Carbon Tracker. Made for the Clean Coding Challenge.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
