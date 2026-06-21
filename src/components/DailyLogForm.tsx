@@ -366,7 +366,7 @@ export default function DailyLogForm({ baseline, onSave, selectedDate }: DailyLo
             <button
               type="submit"
               id="submit-daily-log"
-              className={`px-5 py-3 rounded-lg text-sm font-bold shadow-md cursor-pointer transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-lg text-sm font-bold shadow-md cursor-pointer transition-all flex items-center gap-2 whitespace-nowrap ${
                 stats.saved > 0 
                   ? "bg-emerald-600 hover:bg-emerald-500 text-white" 
                   : "bg-slate-700 hover:bg-slate-600 text-white"
