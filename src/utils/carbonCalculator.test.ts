@@ -53,6 +53,18 @@ describe("carbonCalculator", () => {
       expect(result.food).toBeCloseTo(1.3);
     });
 
+    it("should apply dietary factors correctly based on high food waste", () => {
+      const assessment = {
+        ...DEFAULT_ASSESSMENT,
+        dietType: "vegan" as const,
+        foodWasteLevel: "high" as const,
+        organicLocalRatio: 0.0
+      };
+      const result = calculateBaseline(assessment);
+      // Vegan base: 1.7, high waste: +1.2 = 2.9
+      expect(result.food).toBeCloseTo(2.9);
+    });
+
     it("should correctly offset composted and recycled waste", () => {
       const assessment = {
         ...DEFAULT_ASSESSMENT,
@@ -131,6 +143,33 @@ describe("carbonCalculator", () => {
       // Waste: 1.8
       // Total: 3.2 + 10.3 + 3.5 + 1.8 = 18.8
       expect(result.actual).toBeCloseTo(18.8);
+    });
+
+    it("should handle some food waste score accurately", () => {
+      const logEntry = {
+        id: "test-log-3",
+        date: "2026-06-21",
+        milesDriven: 0,
+        milesTransit: 0,
+        milesBikedWalked: 0,
+        servingsRedMeat: 0,
+        servingsPoultryFish: 1, // 1 * 1.3 = 1.3
+        mealsPlantBased: 0,
+        foodWastedScore: "some" as const, // +0.3
+        shorterShowerDone: false,
+        thermostatOffsetUsed: false,
+        phantomPowerCut: false,
+        recycledFully: false,
+        compostedFully: false
+      };
+
+      const result = calculateDailyEntryEmissions(logEntry, mockBaseline);
+      // Food: 1.3 + 0.8 (buffer) + 0.3 (some waste) = 2.4
+      // Transport: 0
+      // Energy: 3.5
+      // Waste: 1.8
+      // Total: 0 + 2.4 + 3.5 + 1.8 = 7.7
+      expect(result.actual).toBeCloseTo(7.7);
     });
   });
 });
