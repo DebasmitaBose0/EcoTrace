@@ -275,9 +275,10 @@ export default function AiCoachChat({ vertical, footprint, hasApiKey, onApiKeyMi
         <div ref={scrollRef} />
       </div>
 
-      {/* Input Form area */}
       <form onSubmit={sendMessage} className="p-3 border-t border-slate-100 bg-white flex items-center space-x-2 shrink-0">
         <input
+          id="chat-message-input"
+          aria-label="Ask coach for eco-advice"
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}

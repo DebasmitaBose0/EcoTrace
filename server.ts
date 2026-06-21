@@ -3,10 +3,21 @@ import path from "path";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
+import cors from "cors";
+import helmet from "helmet";
 
 dotenv.config();
 
 const app = express();
+
+// Security middlewares
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;

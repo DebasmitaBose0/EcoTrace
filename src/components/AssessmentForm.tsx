@@ -343,38 +343,40 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Kitchen Food-Waste Level</label>
-                <div className="grid grid-cols-3 gap-3">
-                  {["low", "medium", "high"].map((level) => (
-                    <button
-                      key={level}
-                      type="button"
-                      onClick={() => updateField("foodWasteLevel", level)}
-                      className={`py-2 px-4 rounded-lg border text-sm capitalize text-center font-medium transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-                        data.foodWasteLevel === level
-                          ? "bg-emerald-50 border-emerald-500 text-emerald-700 shadow-sm"
-                          : "border-slate-200 hover:border-slate-300 text-slate-600"
-                      }`}
-                    >
-                      {level === "low" ? (
-                        <>
-                          <Utensils className="h-4 w-4 text-emerald-600 shrink-0" />
-                          <span>Minimal Trash</span>
-                        </>
-                      ) : level === "medium" ? (
-                        <>
-                          <Trash2 className="h-4 w-4 text-slate-500 shrink-0" />
-                          <span>Average</span>
-                        </>
-                      ) : (
-                        <>
-                          <Flame className="h-4 w-4 text-rose-500 shrink-0" />
-                          <span>Frequent Scraps</span>
-                        </>
-                      )}
-                    </button>
-                  ))}
-                </div>
+                <fieldset className="border-0 p-0 m-0 space-y-1">
+                  <legend className="block text-sm font-medium text-slate-700 mb-1">Kitchen Food-Waste Level</legend>
+                  <div className="grid grid-cols-3 gap-3">
+                    {["low", "medium", "high"].map((level) => (
+                      <button
+                        key={level}
+                        type="button"
+                        onClick={() => updateField("foodWasteLevel", level)}
+                        className={`py-2 px-4 rounded-lg border text-sm capitalize text-center font-medium transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                          data.foodWasteLevel === level
+                            ? "bg-emerald-50 border-emerald-500 text-emerald-700 shadow-sm"
+                            : "border-slate-200 hover:border-slate-300 text-slate-600"
+                        }`}
+                      >
+                        {level === "low" ? (
+                          <>
+                            <Utensils className="h-4 w-4 text-emerald-600 shrink-0" />
+                            <span>Minimal Trash</span>
+                          </>
+                        ) : level === "medium" ? (
+                          <>
+                            <Trash2 className="h-4 w-4 text-slate-500 shrink-0" />
+                            <span>Average</span>
+                          </>
+                        ) : (
+                          <>
+                            <Flame className="h-4 w-4 text-rose-500 shrink-0" />
+                            <span>Frequent Scraps</span>
+                          </>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
               </div>
             </div>
 
