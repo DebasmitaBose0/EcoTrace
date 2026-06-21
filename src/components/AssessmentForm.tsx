@@ -194,7 +194,7 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Primary Commute Vehicle Type</label>
+                <label htmlFor="vehicle-select" className="block text-sm font-medium text-slate-700 mb-1">Primary Commute Vehicle Type</label>
                 <select
                   id="vehicle-select"
                   value={data.vehicleType}
@@ -210,12 +210,14 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
               </div>
 
               {data.vehicleType !== "none" && (
-                <div>
+                 <div>
                   <div className="flex justify-between text-sm text-slate-700 mb-1">
-                    <label className="font-medium">Weekly Driving Distance (Personal Car)</label>
+                    <label htmlFor="commute-miles-range" className="font-medium">Weekly Driving Distance (Personal Car)</label>
                     <span className="font-mono text-slate-500">{data.commuteMilesPerWeek} miles / week</span>
                   </div>
                   <input
+                    id="commute-miles-range"
+                    aria-label="Weekly Driving Distance in miles"
                     type="range"
                     min="0"
                     max="500"
@@ -233,12 +235,14 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                 </div>
               )}
 
-              <div>
+               <div>
                 <div className="flex justify-between text-sm text-slate-700 mb-1">
-                  <label className="font-medium">Weekly Public Transit Usage (Buses, Subways, Commuter Trains)</label>
+                  <label htmlFor="transit-hours-range" className="font-medium">Weekly Public Transit Usage (Buses, Subways, Commuter Trains)</label>
                   <span className="font-mono text-slate-500">{data.transitHoursPerWeek} hours / week</span>
                 </div>
                 <input
+                  id="transit-hours-range"
+                  aria-label="Weekly Public Transit Usage in hours"
                   type="range"
                   min="0"
                   max="40"
@@ -255,12 +259,14 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                 </div>
               </div>
 
-              <div>
+               <div>
                 <div className="flex justify-between text-sm text-slate-700 mb-1">
-                  <label className="font-medium">Flights Taken Annually (Short-haul & Long-haul)</label>
+                  <label htmlFor="flights-year-range" className="font-medium">Flights Taken Annually (Short-haul & Long-haul)</label>
                   <span className="font-mono text-slate-500">{data.flightsPerYear} flights / year</span>
                 </div>
                 <input
+                  id="flights-year-range"
+                  aria-label="Flights Taken Annually"
                   type="range"
                   min="0"
                   max="20"
@@ -298,9 +304,10 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
             </div>
 
             <div className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Diet Style</label>
+               <div>
+                <label htmlFor="diet-type-select" className="block text-sm font-medium text-slate-700 mb-1">Diet Style</label>
                 <select
+                  id="diet-type-select"
                   value={data.dietType}
                   onChange={(e) => updateField("dietType", e.target.value)}
                   className="w-full bg-white border border-slate-200 text-sm rounded-lg p-2.5 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
@@ -313,11 +320,13 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">How much of your groceries are Organic, Local, or Seasonal?</label>
+               <div>
+                <label htmlFor="organic-local-range" className="block text-sm font-medium text-slate-700 mb-1">How much of your groceries are Organic, Local, or Seasonal?</label>
                 <div className="flex items-center space-x-3 mt-1">
                   <span className="font-mono text-xs text-slate-400">0%</span>
                   <input
+                    id="organic-local-range"
+                    aria-label="Organic Local Sourcing Ratio"
                     type="range"
                     min="0"
                     max="1"
@@ -389,10 +398,11 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
             </div>
 
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Representative House Size (Sqft)</label>
+                  <label htmlFor="house-size-input" className="block text-sm font-medium text-slate-700 mb-1">Representative House Size (Sqft)</label>
                   <input
+                    id="house-size-input"
                     type="number"
                     min="100"
                     max="10000"
@@ -402,8 +412,9 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Avg Monthly Electric Use (kWh)</label>
+                  <label htmlFor="electric-kwh-input" className="block text-sm font-medium text-slate-700 mb-1">Avg Monthly Electric Use (kWh)</label>
                   <input
+                    id="electric-kwh-input"
                     type="number"
                     min="0"
                     max="3000"
@@ -414,9 +425,10 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Electricity Grid Source</label>
+               <div>
+                <label htmlFor="electric-source-select" className="block text-sm font-medium text-slate-700 mb-1">Electricity Grid Source</label>
                 <select
+                  id="electric-source-select"
                   value={data.electricitySource}
                   onChange={(e) => updateField("electricitySource", e.target.value)}
                   className="w-full bg-white border border-slate-200 text-sm rounded-lg p-2.5 focus:border-amber-500"
@@ -426,10 +438,11 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                   <option value="solar">100% Clean / Off-Grid Solar Power / Wind</option>
                 </select>
               </div>
-
+ 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Primary Heating Source</label>
+                <label htmlFor="heating-source-select" className="block text-sm font-medium text-slate-700 mb-1">Primary Heating Source</label>
                 <select
+                  id="heating-source-select"
                   value={data.heatingSource}
                   onChange={(e) => updateField("heatingSource", e.target.value)}
                   className="w-full bg-white border border-slate-200 text-sm rounded-lg p-2.5 focus:border-amber-500"
@@ -440,26 +453,29 @@ export default function AssessmentForm({ currentAssessment, onSave }: Assessment
                 </select>
               </div>
 
-              <div className="border-t border-slate-100 pt-4 space-y-3">
+               <div className="border-t border-slate-100 pt-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <label className="text-sm font-medium text-slate-700 block">Composts Organics regularly?</label>
+                    <label htmlFor="composts-organics-checkbox" className="text-sm font-medium text-slate-700 block">Composts Organics regularly?</label>
                     <span className="text-xs text-slate-400">Diverts scrap food from anaerobic landfills.</span>
                   </div>
                   <input
+                    id="composts-organics-checkbox"
                     type="checkbox"
                     checked={data.compostsOrganics}
                     onChange={(e) => updateField("compostsOrganics", e.target.checked)}
                     className="h-4 w-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300"
                   />
                 </div>
-
+ 
                 <div>
                   <div className="flex justify-between text-sm text-slate-700 mb-1">
-                    <label className="font-medium">How much of your plastic/paper/metal waste is recycled?</label>
+                    <label htmlFor="waste-recycling-range" className="font-medium">How much of your plastic/paper/metal waste is recycled?</label>
                     <span className="font-mono text-slate-500">{Math.round(data.wasteRecyclingRate * 100)}%</span>
                   </div>
                   <input
+                    id="waste-recycling-range"
+                    aria-label="Waste Recycling Rate"
                     type="range"
                     min="0"
                     max="1"
